@@ -3,12 +3,14 @@ import sqlite3
 import bcrypt
 import re
 from database import init_db
-
+import os
 app = Flask(__name__)
 
 # Secret Key for Session Management
-app.config["SECRET_KEY"] = "change_this_to_a_random_secret_key"
-
+app.config["SECRET_KEY"] = os.environ.get(
+    "SECRET_KEY",
+    "fallback-secret-key"
+)
 # Initialize Database
 init_db()
 
